@@ -1,3 +1,4 @@
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +10,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+//魔改版 by zsj
 
 public class Client extends Frame {
     TextField tf = new TextField();
@@ -24,21 +27,21 @@ public class Client extends Frame {
     }
 
     private void launchFrame() {
-        setLocation(400,300);
-        this.setSize(300,300);
+        setLocation(400,80);
+        this.setSize(400,500);
         this.setTitle("超级简陋的聊天室");
         ta.setEditable(false);
         ta.getScrollbarVisibility();
         ta.setCaretPosition(ta.getText().length());
+        ta.setSize(400,470);
         add(tf,BorderLayout.SOUTH);
-        add(ta,BorderLayout.NORTH);
-        pack();
+        add(ta);
         setVisible(true);
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                disconnect();
                 System.exit(0);
+                disconnect();
             }
         });
         tf.addActionListener(new tfListener());
@@ -53,6 +56,7 @@ public class Client extends Frame {
             dos = new DataOutputStream(s.getOutputStream());
             dis = new DataInputStream(s.getInputStream());
             connected = true;
+            ta.setText("连接成功，欢迎进入ZSJ的沙雕聊天室" + "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
